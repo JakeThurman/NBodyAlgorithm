@@ -1,3 +1,5 @@
+import java.text.DecimalFormat;
+
 // Holds a simple X, Y point
 public class Vector {
 	private double x;
@@ -17,10 +19,25 @@ public class Vector {
 	}
 	
 	public String toString() {
-		return "{ x: " + x + ", y: " + y + "}";
+		DecimalFormat df = new DecimalFormat("0.0000");
+
+		return "{ x: " + df.format(x) + ", y: " + df.format(y) + " }";
 	}
 	
-	public static Vector diff(Vector a, Vector b) {
-		return new Vector(a.x - b.x, a.y - b.y);
+	public double getMagnitude() {
+		return Math.sqrt((x * x) + (y * y));
+	}
+	
+	public Vector normalized() {
+		double mag = getMagnitude();
+		return new Vector(x / mag, y / mag);
+	}
+	
+	public Vector add(Vector v) {
+		return new Vector(v.x + x, v.y + y);
+	}
+	
+	public Vector subtract(Vector v) {
+		return new Vector(x - v.x, y - v.y);
 	}
 }

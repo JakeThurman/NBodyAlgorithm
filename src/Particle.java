@@ -1,31 +1,21 @@
-public class Particle {
-	private Vector location;
+import java.text.DecimalFormat;
+
+public class Particle extends Vector {
 	private double mass;
-	private double forceMagnitudeOnMe;
 	
-	public Particle(Vector location, double mass) {
-		this.location = location;
+	public Particle(double x, double y, double mass) {
+		super(x, y);
+		
 		this.mass = mass;
-		this.forceMagnitudeOnMe = 0;
-	}
-	
-	public Vector getLocation() {
-		return location;
 	}
 	
 	public double getMass() {
 		return mass;
 	}
 	
-	public void addForce(double vectorMagnitude) {
-		forceMagnitudeOnMe += vectorMagnitude;
-	}
-	
-	public double getForceSum() {
-		return forceMagnitudeOnMe;
-	}
-	
 	public String toString() {
-		return "{ location: " + location + ", mass: " + mass + "}";
+		DecimalFormat df = new DecimalFormat("0.0000");
+
+		return "{ x: " + df.format(getX()) + ", y: " + df.format(getY()) + ", mass: " + df.format(mass) + " }";
 	}
 }
