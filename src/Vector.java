@@ -17,7 +17,7 @@ public class Vector {
 	}
 	
 	public String toString() {
-		return "(" + x + ", " + y + ")";
+		return "{ x: " + x + ", y: " + y + "}";
 	}
 	
 	public static Vector diff(Vector a, Vector b) {

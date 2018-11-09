@@ -1,14 +1,12 @@
-import java.util.LinkedList;
-
 public class Particle {
 	private Vector location;
 	private double mass;
-	private LinkedList<Vector> forcesOnMe;
+	private double forceMagnitudeOnMe;
 	
 	public Particle(Vector location, double mass) {
 		this.location = location;
 		this.mass = mass;
-		this.forcesOnMe = new LinkedList<Vector>();
+		this.forceMagnitudeOnMe = 0;
 	}
 	
 	public Vector getLocation() {
@@ -19,11 +17,15 @@ public class Particle {
 		return mass;
 	}
 	
-	public void addForce(Vector vector) {
-		forcesOnMe.add(vector);
+	public void addForce(double vectorMagnitude) {
+		forceMagnitudeOnMe += vectorMagnitude;
 	}
 	
-	public double calculate() {
-		// TODO: ???
+	public double getForceSum() {
+		return forceMagnitudeOnMe;
+	}
+	
+	public String toString() {
+		return "{ location: " + location + ", mass: " + mass + "}";
 	}
 }
