@@ -13,6 +13,10 @@ public class Particle extends Vector {
 		return mass;
 	}
 	
+	public void addMass(double mass) {
+		this.mass += mass;
+	}
+	
 	public String toString() {
 		DecimalFormat df = new DecimalFormat("0.0000");
 
