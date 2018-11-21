@@ -55,9 +55,6 @@ public class FastMultipole {
 							forceApprox[approx_x][approx_y] = forceApprox[approx_x][approx_y].add(
 									Main.G(centerOfGravityPoints[approx_x][approx_y],
 											centerOfGravityPoints[square_x][square_y]));
-
-							//System.out.println(forceApprox[approx_x][approx_y]);
-							//TODO: These results are kinda nuts
 						}
 						
 					}
@@ -69,7 +66,8 @@ public class FastMultipole {
 		for(int i = 0; i < 4; i++){
 			for(int j = 0; j < 4; j++){
 				for(ParticleAndForce p : square[i][j]){
-					p.netForce = p.netForce.add(forceApprox[i][j]);
+					p.netForce = p.netForce.add(forceApprox[i][j])
+							.scale(p.particle.getMass()/centerOfGravityPoints[i][j].getMass());;
 				}
 			}
 		}
@@ -120,13 +118,13 @@ public class FastMultipole {
 				
 				while(it.hasNext()){
 					ParticleAndForce pf = it.next();
-					Iterator<ParticleAndForce> it2 = square[x][y].listIterator(iterations);
+					Iterator<ParticleAndForce> it2 = square[x][y].listIterator(iterations+1);
 					
 					while(it2.hasNext()){
 						ParticleAndForce pf2 =  it2.next();
 						Vector force = Main.G(pf.particle, pf2.particle);
 						pf.netForce = pf.netForce.add(force);
-						pf.netForce = pf2.netForce.subtract(force);
+						pf2.netForce = pf2.netForce.subtract(force);
 					}
 					
 					iterations++;

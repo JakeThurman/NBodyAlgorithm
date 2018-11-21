@@ -3,11 +3,11 @@ import java.util.Random;
 public class Main {
 	
 	final static double GRAVITY_CONST = 9.81; 
-	final static int NUMBER_OF_POINTS = 200;
+	final static int NUMBER_OF_POINTS = 10000;
 	
 	public static void main(String args[]){		
 		Particle[] points = new Particle[NUMBER_OF_POINTS];
-		Random random = new Random(1010); // change the number for a different data set
+		Random random = new Random(1020); // change the number for a different data set
 		long timeForBrute, timeForMultipole, startTime;
 				
 		// Generate random particles using 

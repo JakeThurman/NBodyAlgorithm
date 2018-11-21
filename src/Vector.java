@@ -40,4 +40,8 @@ public class Vector {
 	public Vector subtract(Vector v) {
 		return new Vector(x - v.x, y - v.y);
 	}
+	
+	public Vector scale(double scalar){
+		return new Vector(x * scalar, y * scalar);
+	}
 }
