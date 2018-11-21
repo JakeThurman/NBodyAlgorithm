@@ -1,22 +1,35 @@
+import java.util.Random;
+
 public class Main {
 	
 	final static double GRAVITY_CONST = 9.81; 
-	final static int NUMBER_OF_POINTS = 3;
+	final static int NUMBER_OF_POINTS = 200;
 	
 	public static void main(String args[]){		
-		Particle[] my_points = new Particle[NUMBER_OF_POINTS];
+		Particle[] points = new Particle[NUMBER_OF_POINTS];
+		Random random = new Random(1010); // change the number for a different data set
+		long timeForBrute, timeForMultipole, startTime;
 				
 		// Generate random particles using 
 		//   the range (0, 1) for x and y and mass
 		for (int i = 0; i < NUMBER_OF_POINTS; i++) {
-			my_points[i] = new Particle(Math.random(), Math.random(), Math.random() * 5);
+			points[i] = new Particle(random.nextDouble(), random.nextDouble(), random.nextDouble() * 5);
 	    }
 		
-		Vector[] bruteForceResult = bruteForce(my_points);
+		startTime = System.nanoTime();
+		Vector[] bruteForceResult = bruteForce(points);
+		timeForBrute = System.nanoTime() - startTime;
+		
+		startTime = System.nanoTime();
+		Vector[] multipoleResult = FastMultipole.calculateNetForces(points);
+		timeForMultipole = System.nanoTime() - startTime;
 		
 		for (int i = 0; i < NUMBER_OF_POINTS; i++) {
-			print("The net force on " + my_points[i] + " is " + bruteForceResult[i]);
+			print("The net force on " + points[i] + " is " + bruteForceResult[i]);
+			print("Multipole estimation is " + multipoleResult[i]);
 	    }
+		print("Time for brute: " + (timeForBrute/1000) + " ms");
+		print("Time for multipole: " + (timeForMultipole/1000) + " ms");
 	}
 	
 	// Shortcut!
