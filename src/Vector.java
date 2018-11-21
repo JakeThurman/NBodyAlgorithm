@@ -9,6 +9,10 @@ public class Vector {
 		this.x = x;
 		this.y = y;
 	}
+	public Vector(Vector copy){
+		this.x = copy.x;
+		this.y = copy.y;
+	}
 	
 	public double getX() {
 		return x;
@@ -30,18 +34,26 @@ public class Vector {
 	
 	public Vector normalized() {
 		double mag = getMagnitude();
-		return new Vector(x / mag, y / mag);
+		x /= mag;
+		y /= mag;
+		return this;
 	}
 	
 	public Vector add(Vector v) {
-		return new Vector(v.x + x, v.y + y);
+		x += v.x;
+		y += v.y;
+		return this;
 	}
 	
 	public Vector subtract(Vector v) {
-		return new Vector(x - v.x, y - v.y);
+		x -= v.x;
+		y -= v.y;
+		return this;
 	}
 	
 	public Vector scale(double scalar){
-		return new Vector(x * scalar, y * scalar);
+		x *= scalar;
+		y *= scalar;
+		return this;
 	}
 }

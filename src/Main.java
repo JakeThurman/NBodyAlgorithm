@@ -3,11 +3,11 @@ import java.util.Random;
 public class Main {
 	
 	final static double GRAVITY_CONST = 9.81; 
-	final static int NUMBER_OF_POINTS = 10000;
+	final static int NUMBER_OF_POINTS = 60000;
 	
 	public static void main(String args[]){		
 		Particle[] points = new Particle[NUMBER_OF_POINTS];
-		Random random = new Random(1020); // change the number for a different data set
+		Random random = new Random(777); // change the number for a different data set
 		long timeForBrute, timeForMultipole, startTime;
 				
 		// Generate random particles using 
@@ -28,8 +28,8 @@ public class Main {
 			print("The net force on " + points[i] + " is " + bruteForceResult[i]);
 			print("Multipole estimation is " + multipoleResult[i]);
 	    }
-		print("Time for brute: " + (timeForBrute/1000) + " ms");
-		print("Time for multipole: " + (timeForMultipole/1000) + " ms");
+		print("Time for brute: " + (timeForBrute/1000000) + " ms");
+		print("Time for multipole: " + (timeForMultipole/1000000) + " ms");
 	}
 	
 	// Shortcut!
@@ -61,13 +61,13 @@ public class Main {
 	}
 	
 	public static Vector G(Particle a, Particle b) {
-		Vector force = b.subtract(a).normalized();
+		Vector force = new Vector(b).subtract(a).normalized();
 
 		double xSum = a.getX() + b.getX();
 		double ySum = a.getY() + b.getY();
 		
 		double scalar = (GRAVITY_CONST * a.getMass() * b.getMass()) / ((xSum * xSum) + (ySum * ySum));
 		
-		return new Vector(force.getX() * scalar, force.getY() * scalar);
+		return force.scale(scalar);
 	}
 }
