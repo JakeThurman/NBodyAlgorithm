@@ -11,7 +11,7 @@ public class Main {
 		long timeForBrute, timeForMultipole, startTime;
 				
 		// Generate random particles using 
-		//   the range (0, 1) for x and y and mass
+		//   the range (0, 1) for x and y and (0, 5) for mass
 		for (int i = 0; i < NUMBER_OF_POINTS; i++) {
 			points[i] = new Particle(random.nextDouble(), random.nextDouble(), random.nextDouble() * 5);
 	    }
