@@ -51,6 +51,10 @@ public class Vector {
 		return this;
 	}
 	
+	public Vector clone() {
+		return new Vector(x, y);
+	}
+	
 	public Vector scale(double scalar){
 		x *= scalar;
 		y *= scalar;

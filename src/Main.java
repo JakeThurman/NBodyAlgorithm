@@ -3,7 +3,7 @@ import java.util.Random;
 public class Main {
 	
 	final static double GRAVITY_CONST = 9.81; 
-	final static int NUMBER_OF_POINTS = 60000;
+	final static int NUMBER_OF_POINTS = 10000;
 	
 	public static void main(String args[]){		
 		Particle[] points = new Particle[NUMBER_OF_POINTS];
@@ -25,11 +25,17 @@ public class Main {
 		timeForMultipole = System.nanoTime() - startTime;
 		
 		for (int i = 0; i < NUMBER_OF_POINTS; i++) {
-			print("The net force on " + points[i] + " is " + bruteForceResult[i]);
-			print("Multipole estimation is " + multipoleResult[i]);
+			//print("The net force on " + points[i] + " is " + bruteForceResult[i]);
+			//print("Multipole estimation is " + multipoleResult[i]);
+				
+			print("Error: " + getMarginOfError(bruteForceResult[i], multipoleResult[i]) + "%");
 	    }
 		print("Time for brute: " + (timeForBrute/1000000) + " ms");
 		print("Time for multipole: " + (timeForMultipole/1000000) + " ms");
+	}
+	
+	public static double getMarginOfError(Vector a, Vector b) {
+		return a.clone().subtract(b).getMagnitude() / a.getMagnitude() * 100;
 	}
 	
 	// Shortcut!
