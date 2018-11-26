@@ -6,6 +6,7 @@ public class Main {
 	final static int NUMBER_OF_POINTS = 10000;
 	
 	public static void main(String args[]){		
+		double avgError = 0;
 		Particle[] points = new Particle[NUMBER_OF_POINTS];
 		Random random = new Random(777); // change the number for a different data set
 		long timeForBrute, timeForMultipole, startTime;
@@ -29,9 +30,11 @@ public class Main {
 			//print("Multipole estimation is " + multipoleResult[i]);
 				
 			print("Error: " + getMarginOfError(bruteForceResult[i], multipoleResult[i]) + "%");
+			avgError += getMarginOfError(bruteForceResult[i], multipoleResult[i]);
 	    }
 		print("Time for brute: " + (timeForBrute/1000000) + " ms");
 		print("Time for multipole: " + (timeForMultipole/1000000) + " ms");
+		print("Average Error: " + (avgError/NUMBER_OF_POINTS));
 	}
 	
 	public static double getMarginOfError(Vector a, Vector b) {

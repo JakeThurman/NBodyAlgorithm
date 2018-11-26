@@ -1,17 +1,19 @@
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.Queue;
 
 public class FastMultipole {
-	private static final int divs = 4;
+	public static final int divs = 128;
+	
 	public static Vector[] calculateNetForces(Particle[] particles){
 		
 		Particle[][] centerOfGravityPoints = new Particle[divs][divs];
 		
+		double boxWidth = 1/(double)divs;
+		
 		for(int i = 0; i < divs; i++){
 			for(int j = 0; j < divs; j++){
 				// Init the centerpoints in the proper position
-				centerOfGravityPoints[i][j] = new Particle(1.0 / (double)divs * 2.0 + (1.0/(double)divs * i), 1.0 / (double)divs * 2.0 + (1.0/divs * j), 0);
+				centerOfGravityPoints[i][j] = new Particle(boxWidth/2 + (boxWidth * i), boxWidth/2 + (boxWidth * j), 0);
 			}
 		}
 		
