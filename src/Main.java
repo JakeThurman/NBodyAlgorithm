@@ -5,16 +5,21 @@ public class Main {
 	final static double GRAVITY_CONST = 9.81; 
 	final static int NUMBER_OF_POINTS = 10000;
 	
-	public static void main(String args[]){		
+	public static void main(String args[]) throws Exception {		
 		double avgError = 0;
 		Particle[] points = new Particle[NUMBER_OF_POINTS];
-		Random random = new Random(777); // change the number for a different data set
 		long timeForBrute, timeForMultipole, startTime;
 				
+		Random random = new Random(777);
+		HaltonSequenceGenerator rand = new HaltonSequenceGenerator(1); 
+		
 		// Generate random particles using 
 		//   the range (0, 1) for x and y and (0, 5) for mass
 		for (int i = 0; i < NUMBER_OF_POINTS; i++) {
-			points[i] = new Particle(random.nextDouble(), random.nextDouble(), random.nextDouble() * 5);
+			points[i] = new Particle(
+				rand.nextVector()[0], 
+				rand.nextVector()[0], 
+				rand.nextVector()[0] * 5);
 	    }
 		
 		startTime = System.nanoTime();
