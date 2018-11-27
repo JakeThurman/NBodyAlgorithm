@@ -1,10 +1,9 @@
 import java.util.Iterator;
 import java.util.LinkedList;
 
-public class FastMultipole {
-	public static final int divs = 128;
-	
-	public static Vector[] calculateNetForces(Particle[] particles){
+public class FastMultipole {	
+	public static Vector[] calculateNetForces(Particle[] particles) {
+		int divs = (int)Math.floor(Math.pow(2, Math.floor(Math.log10(particles.length)) + 1));
 		
 		Particle[][] centerOfGravityPoints = new Particle[divs][divs];
 		
