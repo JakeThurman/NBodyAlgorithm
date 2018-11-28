@@ -1,56 +1,54 @@
-import java.util.Random;
-
 public class Main {
 	
 	final static double GRAVITY_CONST = 9.81; 
 	final static int NUMBER_OF_POINTS = 1000000;
 	
 	public static void main(String args[]) throws Exception {
-		for (int NUMBER_OF_POINTS = 10; NUMBER_OF_POINTS < 10000000; NUMBER_OF_POINTS *= 10)
-		for (int x = 0; x < 3; x++) {
-			
-			double avgError = 0;
-			Particle[] points = new Particle[NUMBER_OF_POINTS];
-			long timeForBrute, timeForMultipole, startTime;
-					
-			//Random random = new Random();
+		for (int NUMBER_OF_POINTS = 10000; NUMBER_OF_POINTS < 10000000; NUMBER_OF_POINTS += 10000) {
 			HaltonSequenceGenerator rand = new HaltonSequenceGenerator(1); 
 			
-			// Generate random particles using 
-			//   the range (0, 1) for x and y and (0, 5) for mass
-			for (int i = 0; i < NUMBER_OF_POINTS; i++) {
-				points[i] = new Particle(
-					rand.nextVector()[0], 
-					rand.nextVector()[0], 
-					rand.nextVector()[0] * 5);
-					
-		    }
-			
-			startTime = System.nanoTime();
-			Vector[] bruteForceResult = bruteForce(points);
-			timeForBrute = System.nanoTime() - startTime;
-			
-			startTime = System.nanoTime();
-			Vector[] multipoleResult = FastMultipole.calculateNetForces(points);
-			timeForMultipole = System.nanoTime() - startTime;
-			
-			for (int i = 0; i < NUMBER_OF_POINTS; i++) {
-				//print("The net force on " + points[i] + " is " + bruteForceResult[i]);
-				//print("Multipole estimation is " + multipoleResult[i]);
-					
-				//print("Error: " + getMarginOfError(bruteForceResult[i], multipoleResult[i]) + "%");
-				avgError += getMarginOfError(bruteForceResult[i], multipoleResult[i]);
-		    }
-			
-			print("" + NUMBER_OF_POINTS + ", " 
-					 + (timeForBrute/1000000) + ", " 
-					 + (timeForMultipole/1000000) + ", "
-					 + (avgError/NUMBER_OF_POINTS));
-			
-			//print("Time for brute: " + (timeForBrute/1000000) + " ms");
-			//print("Time for multipole: " + (timeForMultipole/1000000) + " ms");
-			//print("Average Error: " + (avgError/NUMBER_OF_POINTS));
-		
+			for (int data_point = 0; data_point < 10; data_point++) {
+				double avgError = 0;
+				Particle[] points = new Particle[NUMBER_OF_POINTS];
+				long timeForBrute, timeForMultipole, startTime;
+						
+				//Random random = new Random();
+				
+				// Generate random particles using 
+				//   the range (0, 1) for x and y and (0, 5) for mass
+				for (int i = 0; i < NUMBER_OF_POINTS; i++) {
+					points[i] = new Particle(
+						rand.nextVector()[0], 
+						rand.nextVector()[0], 
+						rand.nextVector()[0] * 5);
+						
+			    }
+				
+				startTime = System.nanoTime();
+				Vector[] bruteForceResult = bruteForce(points);
+				timeForBrute = System.nanoTime() - startTime;
+				
+				startTime = System.nanoTime();
+				Vector[] multipoleResult = FastMultipole.calculateNetForces(points);
+				timeForMultipole = System.nanoTime() - startTime;
+				
+				for (int i = 0; i < NUMBER_OF_POINTS; i++) {
+					//print("The net force on " + points[i] + " is " + bruteForceResult[i]);
+					//print("Multipole estimation is " + multipoleResult[i]);
+						
+					//print("Error: " + getMarginOfError(bruteForceResult[i], multipoleResult[i]) + "%");
+					avgError += getMarginOfError(bruteForceResult[i], multipoleResult[i]);
+			    }
+				
+				print("" + NUMBER_OF_POINTS + ", " 
+						 + (timeForBrute/1000000) + ", " 
+						 + (timeForMultipole/1000000) + ", "
+						 + (avgError/NUMBER_OF_POINTS));
+				
+				//print("Time for brute: " + (timeForBrute/1000000) + " ms");
+				//print("Time for multipole: " + (timeForMultipole/1000000) + " ms");
+				//print("Average Error: " + (avgError/NUMBER_OF_POINTS));
+			}
 		}
 	}
 	
