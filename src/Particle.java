@@ -1,5 +1,6 @@
 import java.text.DecimalFormat;
 
+// Holds an x y and mass
 public class Particle extends Vector {
 	private double mass;
 	

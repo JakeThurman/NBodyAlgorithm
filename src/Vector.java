@@ -50,11 +50,7 @@ public class Vector {
 		y -= v.y;
 		return this;
 	}
-	
-	public Vector clone() {
-		return new Vector(x, y);
-	}
-	
+
 	public Vector scale(double scalar){
 		x *= scalar;
 		y *= scalar;
