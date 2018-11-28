@@ -3,7 +3,7 @@ import java.util.LinkedList;
 
 public class FastMultipole {	
 	public static Vector[] calculateNetForces(Particle[] particles) {
-		int divs = (int)Math.floor(Math.pow(2, Math.floor(Math.log10(particles.length)) + 1));
+		int divs = 4;
 		
 		Particle[][] centerOfGravityPoints = new Particle[divs][divs];
 		
@@ -79,7 +79,7 @@ public class FastMultipole {
 			for(int y = 0; y < divs; y++){
 				
 				// Special iteration
-				int neighbor_x, neighbor_y = 1; // ASK: Why aren't we checking vertical neighbors
+				int neighbor_x, neighbor_y = 1;
 				for(neighbor_x = -1; neighbor_x <= 1; neighbor_x++){
 					if(x + neighbor_x < divs && x + neighbor_x >= 0 && y + neighbor_y < divs){
 						
